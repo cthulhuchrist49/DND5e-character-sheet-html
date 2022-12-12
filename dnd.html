@@ -35,17 +35,51 @@
             var bute = parseInt(document.getElementById(attr).innerText)
             var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
 
-            if (prof + bute >= 0)
+            if ((prof + bute) >= 0)
                 if(document.getElementById(skillId).checked) {
                     document.getElementById(skillMod).innerHTML = '+' + (prof + bute + 2)
                 }
                 else {document.getElementById(skillMod).innerHTML = '+' + (prof + bute)}
             else 
                 if(document.getElementById(skillId).checked) {
+                    if ((prof + bute) +2 >= 0) {
+                        document.getElementById(skillMod).innerHTML = '+' + (prof + bute + 2)
+                    }
+                    else{
                     document.getElementById(skillMod).innerHTML = (prof + bute) + 2
+                    }
                 }
                 else {document.getElementById(skillMod).innerHTML = (prof +  bute)}
             
+        }
+
+        function changesave(saveid, abilityid) {
+            var ability = parseInt(document.getElementById(abilityid).innerText)
+            var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
+
+            if (prof + ability >= 0)
+               document.getElementById(saveid).innerHTML = '+' + (prof + ability)
+            else 
+                document.getElementById(saveid).innerHTML = (prof +  ability)  
+        }
+        
+        function changepassivep() {
+            if (parseInt(document.getElementById('wis').innerText) < 0) {
+                var ability = parseInt(document.getElementById('wis').innerText)
+            }
+            else {
+                var ability = parseInt(document.getElementById('wis').innerText.slice(1))
+                  
+            }
+            var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
+           
+
+        
+
+            if (prof + ability >= 0)
+               document.getElementById('passiveper').innerHTML = '+' + (prof + ability + 10) 
+            else 
+                document.getElementById('passiveper').innerHTML = (prof +  ability + 10)  
         }
 
         
@@ -125,6 +159,10 @@
         .insandprof {
             padding: 10px;
         }
+        .savingthrows {
+            padding: 10px;
+            border:2px solid black;
+        }
 
         .ins {
             display: flex;
@@ -136,6 +174,23 @@
             display: flex;
             flex-direction: row;
             padding: 2px;
+            align-items: center;
+        }
+
+        .savingthrow {
+            display: flex;
+            flex-direction: row;
+            padding: 2px;
+            align-items: center;
+        }
+
+        .save {
+            margin:2px;
+            border:solid 1px black;
+            height: 3rem;
+            width: 3.5rem;
+            display: flex;
+            justify-content: center;
             align-items: center;
         }
 
@@ -211,7 +266,7 @@
         
         <div class = "info">
            <div class = "infobox">
-                <div class="class-level-box"><input id = "classinput" /><input id = "levelinput" onchange="changeprof('profbonus','levelinput'), getSkillMod('athCheck', 'str', 'athMod'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod')"/></div>
+                <div class="class-level-box"><input id = "classinput" /><input id = "levelinput" onchange="changeprof('profbonus','levelinput'), getSkillMod('athCheck', 'str', 'athMod'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod'), changesave('strsave', 'str'), changesave('dexsave', 'dex'), changesave('consave', 'con'), changesave('intsave', 'int'), changesave('wissave', 'wis'), changesave('chasave', 'cha'), changepassivep()"/></div>
                 <p>Class & Level</p>
            </div>
            
@@ -247,38 +302,38 @@
         <div id="statsBoxContainer" style = "border:3px solid rgb(25, 14, 14); background-color: rgb(230, 227, 219);" >
             <div class="statbox">
                 <p>Strength</p>
-                <input id="strinput" onchange="changeText('str','strinput'), getSkillMod('athCheck', 'str', 'athMod')" />
-                <h1 id="str">0</h1>
+                <input id="strinput" onchange="changeText('str','strinput'), getSkillMod('athCheck', 'str', 'athMod'), changesave('strsave', 'str')" />
+                <h1 id="str">+0</h1>
             </div>
 
             <div class="statbox">
                 <p>Dexterity</p>
-                <input id="dexinput" onchange="changeText('dex','dexinput'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod')" />
-                <h1 id="dex" >0</h1>
+                <input id="dexinput" onchange="changeText('dex','dexinput'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod'), changesave('dexsave', 'dex')" />
+                <h1 id="dex" >+0</h1>
             </div>
 
             <div class="statbox">
                 <p>Constitution</p>
-                <input id="coninput" onchange="changeText('con','coninput')" />
-                <h1 id="con">0</h1>
+                <input id="coninput" onchange="changeText('con','coninput'), changesave('consave', 'con')" />
+                <h1 id="con">+0</h1>
             </div>
             
             <div class="statbox">
                 <p>Intelligence</p>
-                <input id="intinput" onchange="changeText('int','intinput'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod')" />
-                <h1 id="int">0</h1>
+                <input id="intinput" onchange="changeText('int','intinput'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod'), changesave('intsave', 'int')" />
+                <h1 id="int">+0</h1>
             </div>
         
             <div class="statbox">
                 <p>Wisdom</p>
-                <input id="wisinput" onchange="changeText('wis','wisinput'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod')" />
-                <h1 id="wis">0</h1>
+                <input id="wisinput" onchange="changeText('wis','wisinput'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod'), changesave('wissave', 'wis'), changepassivep()" />
+                <h1 id="wis">+0</h1>
             </div>
         
             <div class="statbox">
                 <p>Charisma</p>
-                <input id="chainput" onchange="changeText('cha','chainput'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod')" />
-                <h1 id="cha">0</h1>
+                <input id="chainput" onchange="changeText('cha','chainput'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod'), changesave('chasave', 'cha')" />
+                <h1 id="cha">+0</h1>
             </div>
         </div>
 
@@ -292,26 +347,28 @@
                 </div>
             </div> 
             <div class="savingthrows">
+                <p>Saving Throws</p>
                 <div class="savingthrow">
-                    <div id = "strsave">+2</div><p>Strength</p>
+                    <div class="save" id = "strsave">+2</div><p>Strength</p>
                 </div>
                 <div class="savingthrow">
-                    <div id = "dexsave">+2</div><p>Dexterity</p>
+                    <div class="save" id = "dexsave">+2</div><p>Dexterity</p>
                 </div>
                 <div class="savingthrow">
-                    <div id = "consave">+2</div><p>Constitution</p>
+                    <div class="save" id = "consave">+2</div><p>Constitution</p>
                 </div>
                 <div class="savingthrow">
-                    <div id = "intsave">+2</div><p>Intelligence</p>
+                    <div class="save" id = "intsave">+2</div><p>Intelligence</p>
                 </div>
                 <div class="savingthrow">
-                    <div id = "wissave">+2</div><p>Wisdom</p>
+                    <div class="save" id = "wissave">+2</div><p>Wisdom</p>
                 </div>
                 <div class="savingthrow">
-                    <div id = "chasave">+2</div><p>Charisma</p>
+                    <div class="save" id = "chasave">+2</div><p>Charisma</p>
                 </div>
             </div>
             <div id="skillsBox">
+                <p>Skills</p>
                 <ul id="skillList">
                     <li class="skill">
                         <input class="skillCheck" id="acrCheck" type="checkbox" onclick = "getSkillMod('acrCheck', 'dex', 'acrMod')">
@@ -405,6 +462,12 @@
                     </li>
                 </ul>
             </div>
+            <div class="passiveperception">
+                <div class="savingthrow">
+                    <div class="save" id = "passiveper">+12</div><p>Passive Perception</p>
+                </div>
+            </div>
+
         </div> 
     </div>
 
