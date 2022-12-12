@@ -19,18 +19,32 @@
            
         }
 
+        function changeprof(profid,levelinput) {
+            var text = document.getElementById(levelinput).value;
+
+            var modifier = Math.ceil((text/4)+1);
+
+            if (modifier >= 0) {modifier = '+'+ modifier}
+             
+            
+            document.getElementById(profid).innerHTML = modifier
+           
+        }
+
         function getSkillMod(skillId, attr, skillMod) {
             var bute = parseInt(document.getElementById(attr).innerText)
-            if (bute >= 0)
+            var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
+
+            if (prof + bute >= 0)
                 if(document.getElementById(skillId).checked) {
-                    document.getElementById(skillMod).innerHTML = '+' + (bute + 2)
+                    document.getElementById(skillMod).innerHTML = '+' + (prof + bute + 2)
                 }
-                else {document.getElementById(skillMod).innerHTML = '+' + bute}
+                else {document.getElementById(skillMod).innerHTML = '+' + (prof + bute)}
             else 
                 if(document.getElementById(skillId).checked) {
-                    document.getElementById(skillMod).innerHTML = bute + 2
+                    document.getElementById(skillMod).innerHTML = (prof + bute) + 2
                 }
-                else {document.getElementById(skillMod).innerHTML = bute}
+                else {document.getElementById(skillMod).innerHTML = (prof +  bute)}
             
         }
 
@@ -38,6 +52,55 @@
     </script>
 
     <style>
+        body {
+            display:flex;
+            flex-direction: column;
+            flex-wrap:wrap;
+            width: 80vw;
+            border: 13px groove grey;
+            box-sizing:border-box;
+            margin: auto;
+        }
+
+        .nameandinfobox{
+            display:flex;
+            flex-direction:row;
+            margin:auto;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            width: 95%;
+            justify-items: center;
+        }
+        .name{
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items:center;
+            width: 40%;
+            border: 1px solid black;
+        }
+        .info{
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            width: 60%;
+            border: 1px solid black;
+            padding: 2px;
+        }  
+      
+        .infobox {
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .class-level-box {
+            width:100%;
+            display: flex;
+            flex-direction: row;
+        }
 
         .statbox{
             display: flex;
@@ -57,13 +120,40 @@
             display: flex;
             flex-direction: row;
             margin-right: 5px;
-            
+        }
+
+        .insandprof {
+            padding: 10px;
+        }
+
+        .ins {
+            display: flex;
+            flex-direction: row;
+            padding: 2px;
+        }
+
+        .prof {
+            display: flex;
+            flex-direction: row;
+            padding: 2px;
+            align-items: center;
+        }
+
+        #profbonus {
+            margin:2px;
+            border:solid 1px black;
+            height: 3rem;
+            width: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         #statsAndSkills {
             display: flex;
             flex-direction: row;
             border: 3px dotted black;
             width: fit-content;
+            margin:15px;
         }
         #statsBoxContainer {
             border: 1px solid black;
@@ -74,6 +164,26 @@
             flex-direction: column;
             flex-wrap: wrap;
             align-items: flex-start;
+        }
+        #characternameinput {
+         font-size: 1em;
+         border-bottom:1px solid black;
+         border-left: 0ch;
+         border-top: 0ch;
+         border-right: 0ch;
+        }
+        #levelinput {
+         width:20%;
+         font-size: 1em;
+         border:1px solid black;
+        }
+        #classinput {
+         width:80%;
+         font-size: 1em;
+         border-bottom:1px solid black;
+         border-left: 0ch;
+         border-top: 0ch;
+         border-right: 0ch;
         }
         input{
             font-size: 3em;
@@ -93,12 +203,52 @@
 
 </head>
 <body>
+    <div class = "nameandinfobox">
+        <div class = "name">
+            <input id = "characternameinput" />
+            <P>Character Name</P>
+        </div>
+        
+        <div class = "info">
+           <div class = "infobox">
+                <div class="class-level-box"><input id = "classinput" /><input id = "levelinput" onchange="changeprof('profbonus','levelinput'), getSkillMod('athCheck', 'str', 'athMod'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod')"/></div>
+                <p>Class & Level</p>
+           </div>
+           
+           <div class = "infobox">
+                <input id = "characternameinput" />
+                <p>Race</p>
+            </div>
+
+            <div class = "infobox">
+                <input id = "characternameinput" />
+                <p>Player Name</p>
+           </div>
+           
+           <div class = "infobox">
+                <input id = "characternameinput" />
+                <p>Experience Points</p>
+            </div>
+
+            <div class = "infobox">
+                <input id = "characternameinput" />
+                <p>Alignment</p>
+           </div>
+           
+           <div class = "infobox">
+                <input id = "characternameinput" />
+                <p>Background</p>
+            </div>
+ 
+           
+        </div>
+    </div>
     <div id="statsAndSkills">
         <div id="statsBoxContainer" style = "border:3px solid rgb(25, 14, 14); background-color: rgb(230, 227, 219);" >
             <div class="statbox">
                 <p>Strength</p>
-            <input id="strinput" onchange="changeText('str','strinput'), getSkillMod('athCheck', 'str', 'athMod')" />
-            <h1 id="str">0</h1>
+                <input id="strinput" onchange="changeText('str','strinput'), getSkillMod('athCheck', 'str', 'athMod')" />
+                <h1 id="str">0</h1>
             </div>
 
             <div class="statbox">
@@ -132,100 +282,130 @@
             </div>
         </div>
 
-        <div id="skillsBox">
-            <ul id="skillList">
-                <li class="skill">
-                    <input class="skillCheck" id="acrCheck" type="checkbox" onclick = "getSkillMod('acrCheck', 'dex', 'acrMod')">
-                    <div class="skillMod" id="acrMod">+0</div>
-                    <div class="skillName">Acrobatics</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="anmCheck" type="checkbox" onclick = "getSkillMod('anmCheck', 'wis', 'anmMod')">
-                    <div class="skillMod" id="anmMod">+0</div>
-                    <div class="skillName">Animal Handling</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="arcCheck" type="checkbox" onclick = "getSkillMod('arcCheck', 'int', 'arcMod')">
-                    <div class="skillMod" id="arcMod">+0</div>
-                    <div class="skillName">Arcana</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="athCheck" type="checkbox" onclick = "getSkillMod('athCheck', 'str', 'athMod')">
-                    <div class="skillMod" id="athMod">+0</div>
-                    <div class="skillName">Athletics</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="decCheck" type="checkbox" onclick = "getSkillMod('decCheck', 'cha', 'decMod')">
-                    <div class="skillMod" id="decMod">+0</div>
-                    <div class="skillName">Deception</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="hisCheck" type="checkbox" onclick = "getSkillMod('hisCheck', 'int', 'hisMod')">
-                    <div class="skillMod" id="hisMod">+0</div>
-                    <div class="skillName">History</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="insCheck" type="checkbox" onclick = "getSkillMod('insCheck', 'wis', 'insMod')">
-                    <div class="skillMod" id="insMod">+0</div>
-                    <div class="skillName">Insight</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="intimCheck" type="checkbox" onclick = "getSkillMod('intimCheck', 'cha', 'intimMod')">
-                    <div class="skillMod" id="intimMod">+0</div>
-                    <div class="skillName">Intimidation</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="invCheck" type="checkbox" onclick = "getSkillMod('invCheck', 'int', 'invMod')">
-                    <div class="skillMod" id="invMod">+0</div>
-                    <div class="skillName">Investigation</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="medCheck" type="checkbox" onclick = "getSkillMod('medCheck', 'wis', 'medMod')">
-                    <div class="skillMod" id="medMod">+0</div>
-                    <div class="skillName">Medicine</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="natCheck" type="checkbox" onclick = "getSkillMod('natCheck', 'int', 'natMod')">
-                    <div class="skillMod" id="natMod">+0</div>
-                    <div class="skillName">Nature</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="perCheck" type="checkbox" onclick = "getSkillMod('perCheck', 'wis', 'perMod')">
-                    <div class="skillMod" id="perMod">+0</div>
-                    <div class="skillName">Perception</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="perfCheck" type="checkbox" onclick = "getSkillMod('perfCheck', 'cha', 'perfMod')">
-                    <div class="skillMod" id="perfMod">+0</div>
-                    <div class="skillName">Performance</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="persCheck" type="checkbox" onclick = "getSkillMod('persCheck', 'cha', 'persMod')">
-                    <div class="skillMod" id="persMod">+0</div>
-                    <div class="skillName">Persuasion</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="relCheck" type="checkbox" onclick = "getSkillMod('relCheck', 'int', 'relMod')">
-                    <div class="skillMod" id="relMod">+0</div>
-                    <div class="skillName">Religion</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="slyCheck" type="checkbox" onclick = "getSkillMod('slyCheck', 'dex', 'slyMod')">
-                    <div class="skillMod" id="slyMod">+0</div>
-                    <div class="skillName">Sleight of Hand</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="steCheck" type="checkbox" onclick = "getSkillMod('steCheck', 'dex', 'steMod')">
-                    <div class="skillMod" id="steMod">+0</div>
-                    <div class="skillName">Stealth</div>
-                </li>
-                <li class="skill">
-                    <input class="skillCheck" id="surCheck" type="checkbox" onclick = "getSkillMod('surCheck', 'wis', 'surMod')">
-                    <div class="skillMod" id="surMod">+0</div>
-                    <div class="skillName">Survival</div>
-                </li>
-            </ul>
-        </div>
+        <div>
+            <div class = "insandprof">
+                <div class = "ins">
+                    <input id = "levelinput" /><p>Inspiration</p>
+                </div>
+                <div class = "prof">
+                    <div id = "profbonus">+2</div><p>Proficiency Bonus</p>
+                </div>
+            </div> 
+            <div class="savingthrows">
+                <div class="savingthrow">
+                    <div id = "strsave">+2</div><p>Strength</p>
+                </div>
+                <div class="savingthrow">
+                    <div id = "dexsave">+2</div><p>Dexterity</p>
+                </div>
+                <div class="savingthrow">
+                    <div id = "consave">+2</div><p>Constitution</p>
+                </div>
+                <div class="savingthrow">
+                    <div id = "intsave">+2</div><p>Intelligence</p>
+                </div>
+                <div class="savingthrow">
+                    <div id = "wissave">+2</div><p>Wisdom</p>
+                </div>
+                <div class="savingthrow">
+                    <div id = "chasave">+2</div><p>Charisma</p>
+                </div>
+            </div>
+            <div id="skillsBox">
+                <ul id="skillList">
+                    <li class="skill">
+                        <input class="skillCheck" id="acrCheck" type="checkbox" onclick = "getSkillMod('acrCheck', 'dex', 'acrMod')">
+                        <div class="skillMod" id="acrMod">+2</div>
+                        <div class="skillName">Acrobatics</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="anmCheck" type="checkbox" onclick = "getSkillMod('anmCheck', 'wis', 'anmMod')">
+                        <div class="skillMod" id="anmMod">+2</div>
+                        <div class="skillName">Animal Handling</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="arcCheck" type="checkbox" onclick = "getSkillMod('arcCheck', 'int', 'arcMod')">
+                        <div class="skillMod" id="arcMod">+2</div>
+                        <div class="skillName">Arcana</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="athCheck" type="checkbox" onclick = "getSkillMod('athCheck', 'str', 'athMod')">
+                        <div class="skillMod" id="athMod">+2</div>
+                        <div class="skillName">Athletics</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="decCheck" type="checkbox" onclick = "getSkillMod('decCheck', 'cha', 'decMod')">
+                        <div class="skillMod" id="decMod">+2</div>
+                        <div class="skillName">Deception</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="hisCheck" type="checkbox" onclick = "getSkillMod('hisCheck', 'int', 'hisMod')">
+                        <div class="skillMod" id="hisMod">+2</div>
+                        <div class="skillName">History</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="insCheck" type="checkbox" onclick = "getSkillMod('insCheck', 'wis', 'insMod')">
+                        <div class="skillMod" id="insMod">+2</div>
+                        <div class="skillName">Insight</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="intimCheck" type="checkbox" onclick = "getSkillMod('intimCheck', 'cha', 'intimMod')">
+                        <div class="skillMod" id="intimMod">+2</div>
+                        <div class="skillName">Intimidation</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="invCheck" type="checkbox" onclick = "getSkillMod('invCheck', 'int', 'invMod')">
+                        <div class="skillMod" id="invMod">+2</div>
+                        <div class="skillName">Investigation</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="medCheck" type="checkbox" onclick = "getSkillMod('medCheck', 'wis', 'medMod')">
+                        <div class="skillMod" id="medMod">+2</div>
+                        <div class="skillName">Medicine</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="natCheck" type="checkbox" onclick = "getSkillMod('natCheck', 'int', 'natMod')">
+                        <div class="skillMod" id="natMod">+2</div>
+                        <div class="skillName">Nature</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="perCheck" type="checkbox" onclick = "getSkillMod('perCheck', 'wis', 'perMod')">
+                        <div class="skillMod" id="perMod">+2</div>
+                        <div class="skillName">Perception</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="perfCheck" type="checkbox" onclick = "getSkillMod('perfCheck', 'cha', 'perfMod')">
+                        <div class="skillMod" id="perfMod">+2</div>
+                        <div class="skillName">Performance</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="persCheck" type="checkbox" onclick = "getSkillMod('persCheck', 'cha', 'persMod')">
+                        <div class="skillMod" id="persMod">+2</div>
+                        <div class="skillName">Persuasion</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="relCheck" type="checkbox" onclick = "getSkillMod('relCheck', 'int', 'relMod')">
+                        <div class="skillMod" id="relMod">+2</div>
+                        <div class="skillName">Religion</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="slyCheck" type="checkbox" onclick = "getSkillMod('slyCheck', 'dex', 'slyMod')">
+                        <div class="skillMod" id="slyMod">+2</div>
+                        <div class="skillName">Sleight of Hand</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="steCheck" type="checkbox" onclick = "getSkillMod('steCheck', 'dex', 'steMod')">
+                        <div class="skillMod" id="steMod">+2</div>
+                        <div class="skillName">Stealth</div>
+                    </li>
+                    <li class="skill">
+                        <input class="skillCheck" id="surCheck" type="checkbox" onclick = "getSkillMod('surCheck', 'wis', 'surMod')">
+                        <div class="skillMod" id="surMod">+2</div>
+                        <div class="skillName">Survival</div>
+                    </li>
+                </ul>
+            </div>
+        </div> 
     </div>
 
 </body>
