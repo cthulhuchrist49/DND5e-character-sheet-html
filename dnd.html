@@ -35,21 +35,22 @@
             var bute = parseInt(document.getElementById(attr).innerText)
             var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
 
-            if ((prof + bute) >= 0)
-                if(document.getElementById(skillId).checked) {
+            if(document.getElementById(skillId).checked) {
+                if ((prof + bute) >= 0){
                     document.getElementById(skillMod).innerHTML = '+' + (prof + bute )
                 }
-                else {document.getElementById(skillMod).innerHTML = '+' + (bute)}
-            else 
-                if(document.getElementById(skillId).checked) {
-                    if ((prof + bute) >= 0) {
-                        document.getElementById(skillMod).innerHTML = '+' + (prof + bute )
-                    }
-                    else{
+                else{
                     document.getElementById(skillMod).innerHTML = (prof + bute) 
-                    }
                 }
-                else {document.getElementById(skillMod).innerHTML = ( bute)}
+            }
+            else{
+                if ((bute) >= 0){
+                    document.getElementById(skillMod).innerHTML = '+' + (bute )
+                }
+                else{
+                    document.getElementById(skillMod).innerHTML = (bute) 
+                }
+            }
             
         }
 
@@ -57,21 +58,22 @@
             var ability = parseInt(document.getElementById(abilityid).innerText)
             var prof = parseInt(document.getElementById('profbonus').innerText.slice(1))
 
-            if ((prof + ability) >= 0)
-                if(document.getElementById(savecheck).checked) {
+             if(document.getElementById(savecheck).checked) {
+                if ((prof + ability) >= 0){
                     document.getElementById(saveid).innerHTML = '+' + (prof + ability )
                 }
-                else {document.getElementById(saveid).innerHTML = '+' + (ability)}
-            else 
-                if(document.getElementById(savecheck).checked) {
-                    if ((prof + ability) >= 0) {
-                        document.getElementById(saveid).innerHTML = '+' + (prof + ability )
-                    }
-                    else{
+                else{
                     document.getElementById(saveid).innerHTML = (prof + ability) 
-                    }
                 }
-                else {document.getElementById(saveid).innerHTML = (ability)}
+            }
+            else{
+                if ((ability) >= 0){
+                    document.getElementById(saveid).innerHTML = '+' + (ability )
+                }
+                else{
+                    document.getElementById(saveid).innerHTML = (ability) 
+                }
+            }
         }
         
         function changepassivep() {
