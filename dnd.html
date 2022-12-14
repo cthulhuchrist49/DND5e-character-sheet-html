@@ -273,7 +273,7 @@
 
         .statbox{
             display: flex;
-            border: ridge 6px rgb(169, 145, 130);
+            border: solid 2px black;
             box-shadow: 1px 1px 8px 2px rgba(11, 11, 11, 0.418);
             width:  150px;
             height: 150px;
@@ -283,7 +283,9 @@
             margin: 10px;
             padding: 5px;
             padding-bottom: 10px;
-            background: radial-gradient(rgb(230, 224, 218), rgb(138, 123, 107));
+            background: rgb(195, 172, 146);
+            font-style: italic;
+            color: rgb(104, 79, 55);
         }
         .skill {
             display: flex;
@@ -298,24 +300,39 @@
       
 
         .insandprof {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            justify-content: left;
             padding: 10px;
         }
         .savingthrows {
             padding: 10px;
             border:2px solid black;
+            text-align: center;
+            color: rgb(104, 79, 55);
+            font-style: italic;
         }
 
         .ins {
             display: flex;
             flex-direction: row;
             padding: 2px;
+            background:rgb(207, 187, 165);
+            margin:5px;
+            font-style: italic;
+            color:rgb(104, 79, 55);
         }
 
         .prof {
             display: flex;
+            width:13rem;
             flex-direction: row;
-            padding: 2px;
             align-items: center;
+            background:rgb(207, 187, 165);
+            margin:5px;
+            font-style: italic;
+            color:rgb(104, 79, 55);
         }
 
         .savingthrow {
@@ -323,11 +340,15 @@
             flex-direction: row;
             padding: 2px;
             align-items: center;
+            font-style: italic;
+            color:rgb(104, 79, 55);
         }
 
         .save {
             margin:2px;
-            border:solid 1px black;
+            margin-left: 10px;
+            margin-right: 15px;
+            border:solid 1px rgb(104, 79, 55);
             height: 3rem;
             width: 3.5rem;
             display: flex;
@@ -345,25 +366,59 @@
             margin: 20px;
         }
 
+       
+            input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            margin: 2px;
+            font: inherit;
+            color: currentColor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid currentColor;
+            border-radius: 50px;
+            transform: translateY(-0.075em);
+            display: grid;
+            place-content: center;
+            }
+
+            input[type="checkbox"]::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            border-radius: 50px;
+            background-color: rgb(104, 79, 55);
+            
+            }
+
+            input[type="checkbox"]:checked::before {
+            transform: scale(1);
+            }
+           
+
+
+        
         #profbonus {
-            margin:2px;
-            border:solid 1px black;
+            margin-right: 10px;
+            border:solid 1px rgb(104, 79, 55);
             height: 3rem;
-            width: 3.5rem;
+            width: 3.8rem;
             display: flex;
             justify-content: center;
             align-items: center;
+            background: rgba(230,215,199,1);
         }
         #statsAndSkills {
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
-            border: 3px dotted black;
             width: fit-content;
             margin:15px;
         }
         #statsBoxContainer {
-            border: 1px solid black;
             width: fit-content;
         }
         #skillList {
@@ -394,8 +449,8 @@
          font-size: 1.4em;
          font-family:'Courier New', Courier, monospace;
          font-weight: bolder;
-         border:2px inset rgb(104, 79, 55);
-         background-color: rgb(188, 170, 156)
+         border:1px solid rgb(104, 79, 55);
+         background: rgba(230,215,199,1);
         }
         #levelinput:focus{
         color: rgb(165, 77, 18);
@@ -425,6 +480,15 @@
             font-size: 3em;
             max-width: 100%;
             text-align: center;
+            font-family:'Courier New', Courier, monospace;
+            background-color: rgba(0, 0, 0, 0.03);
+            border:2px solid rgb(104, 79, 55);
+        }
+
+        input:focus {
+        color: rgb(165, 77, 18);
+        box-shadow: none;
+        outline: none;
         }
        
         h1{
@@ -436,6 +500,8 @@
        td {
         text-align: center;
        }
+
+       
 
     </style>
 
@@ -484,39 +550,39 @@
     </div>
     <div class="mainbody">
         <div id="statsAndSkills">
-            <div id="statsBoxContainer" style = "border:3px solid rgb(25, 14, 14); background-color: rgb(230, 227, 219);" >
+            <div id="statsBoxContainer" >
                 <div class="statbox">
-                    <p>Strength</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Strength</p>
                     <input id="strinput" onchange="changeText('str','strinput'), getSkillMod('athCheck', 'str', 'athMod'), changesave('strsavecheck','strsave', 'str')" />
                     <h1 id="str">+0</h1>
                 </div>
 
                 <div class="statbox">
-                    <p>Dexterity</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Dexterity</p>
                     <input id="dexinput" onchange="changeText('dex','dexinput'), getSkillMod('steCheck', 'dex', 'steMod'), getSkillMod('slyCheck', 'dex', 'slyMod'), getSkillMod('acrCheck', 'dex', 'acrMod'), changesave('dexsavecheck','dexsave', 'dex')" />
                     <h1 id="dex" >+0</h1>
                 </div>
 
                 <div class="statbox">
-                    <p>Constitution</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Constitution</p>
                     <input id="coninput" onchange="changeText('con','coninput'), changesave('consavecheck','consave', 'con')" />
                     <h1 id="con">+0</h1>
                 </div>
                 
                 <div class="statbox">
-                    <p>Intelligence</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Intelligence</p>
                     <input id="intinput" onchange="changeText('int','intinput'), getSkillMod('relCheck', 'int', 'relMod'), getSkillMod('natCheck', 'int', 'natMod'), getSkillMod('invCheck', 'int', 'invMod'), getSkillMod('arcCheck', 'int', 'arcMod'), getSkillMod('hisCheck', 'int', 'hisMod'), changesave('intsavecheck','intsave', 'int')" />
                     <h1 id="int">+0</h1>
                 </div>
             
                 <div class="statbox">
-                    <p>Wisdom</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Wisdom</p>
                     <input id="wisinput" onchange="changeText('wis','wisinput'), getSkillMod('surCheck', 'wis', 'surMod'),  getSkillMod('perCheck', 'wis', 'perMod'), getSkillMod('medCheck', 'wis', 'medMod'), getSkillMod('anmCheck', 'wis', 'anmMod'), getSkillMod('insCheck', 'wis', 'insMod'), changesave('wissavecheck','wissave', 'wis'), changepassivep()" />
                     <h1 id="wis">+0</h1>
                 </div>
             
                 <div class="statbox">
-                    <p>Charisma</p>
+                    <p style = "font-size: 1.6em; margin-bottom:8px; margin-top:8px;">Charisma</p>
                     <input id="chainput" onchange="changeText('cha','chainput'), getSkillMod('persCheck', 'cha', 'persMod'),  getSkillMod('perfCheck', 'cha', 'perfMod'), getSkillMod('decCheck', 'cha', 'decMod'), getSkillMod('intimCheck', 'cha', 'intimMod'), changesave('chasavecheck','chasave', 'cha')" />
                     <h1 id="cha">+0</h1>
                 </div>
@@ -525,14 +591,14 @@
             <div style = "width:14rem;">
                 <div class = "insandprof">
                     <div class = "ins">
-                        <input id = "levelinput" /><p>Inspiration</p>
+                        <input style = "width:28%; margin-left:0; margin-right:15px;" id = "levelinput" /><p>Inspiration</p>
                     </div>
                     <div class = "prof">
-                        <div id = "profbonus">+2</div><p>Proficiency Bonus</p>
+                        <div  id = "profbonus">+2</div><p>Proficiency Bonus</p>
                     </div>
                 </div> 
                 <div class="savingthrows">
-                    <p>Saving Throws</p>
+                    <p style = "font-size: 1.5em;">Saving Throws</p>
                     <div class="savingthrow">
                         <input class="skillCheck" id="strsavecheck" type="checkbox" onclick = "changesave('strsavecheck','strsave', 'str')"><div class="save" id = "strsave">+0</div><p>Strength</p>
                     </div>
